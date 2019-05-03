@@ -18,22 +18,29 @@ class WannaEatAtIntent : RequestHandler {
         val intent = intentRequest.intent
         val slots = intent.slots
 
-        val restaurant = slots["restaurant"]!!.value.toLowerCase()
-        println("Slot value:$restaurant")
-
-        val menuByRestaurant = mapOf(
-            "pizzeria lucio" to listOf("Pizza Margarita", "Pizza Especial Lucio"),
-            "pizzeria donatello" to listOf("Pizza Cuatro Quesos", "Pizza Especial Donatello")
-        )
-
-        val text = if (menuByRestaurant.containsKey(restaurant)) {
-            "En $restaurant puedes comer: " + menuByRestaurant[restaurant]?.joinToString()
-        } else {
-            "Vaya, no conozco el restaurante $restaurant. Prueba alguna de las opciones que te dije antes."
+        val restaurant = slots["restaurant"]?.value?.toLowerCase()
+        val text = when (restaurant) {
+            null -> "¿A qué restaurante le hacemos el pedido?"
+            else -> {
+                if (menuByRestaurant.containsKey(restaurant)) {
+                    input.attributesManager.sessionAttributes[AttributeConstants.RESTAURANT] = restaurant
+                    "En $restaurant puedes comer: " + menuByRestaurant[restaurant]?.joinToString()
+                } else {
+                    "Vaya, no conozco el restaurante $restaurant. Prueba alguna de las opciones que te dije antes."
+                }
+            }
         }
 
         return input.responseBuilder
             .withSpeech(text)
+            .withShouldEndSession(false)
             .build()
+    }
+
+    companion object {
+        val menuByRestaurant = mapOf(
+            "pizzeria lucio" to listOf("Pizza Margarita", "Pizza Especial Lucio"),
+            "pizzeria donatello" to listOf("Pizza Cuatro Quesos", "Pizza Especial Donatello")
+        )
     }
 }

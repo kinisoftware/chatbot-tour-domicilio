@@ -13,15 +13,24 @@ class OrderIntent : RequestHandler {
     }
 
     override fun handle(input: HandlerInput): Optional<Response> {
+        if (!input.attributesManager.sessionAttributes.containsKey(AttributeConstants.FOOD)
+            || !input.attributesManager.sessionAttributes.containsKey(AttributeConstants.RESTAURANT)
+        ) {
+            return input.responseBuilder
+                .withSpeech("Comienza seleccionando el tipo de comida como pizza o hamburguesa")
+                .withShouldEndSession(true)
+                .build()
+        }
+
         val request = input.requestEnvelope.request
         val intentRequest = request as IntentRequest
         val intent = intentRequest.intent
         val slots = intent.slots
 
-        val order = slots["food"]!!.value
-        println("Slot value:$order")
+        val order = slots["order"]!!.value
 
-        val text = "Okay, ¡gran elección! Vamos a comprar $order en el restaurante."
+        val restaurant = input.attributesManager.sessionAttributes[AttributeConstants.RESTAURANT]
+        val text = "Okay, ¡gran elección! Vamos a comprar $order en $restaurant."
         return input.responseBuilder
             .withSpeech(text)
             .withShouldEndSession(true)
