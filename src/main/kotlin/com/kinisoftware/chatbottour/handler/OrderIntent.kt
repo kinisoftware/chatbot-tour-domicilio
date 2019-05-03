@@ -18,7 +18,7 @@ class OrderIntent : RequestHandler {
         ) {
             return input.responseBuilder
                 .withSpeech("Comienza seleccionando el tipo de comida como pizza o hamburguesa")
-                .withShouldEndSession(true)
+                .withShouldEndSession(false)
                 .build()
         }
 
