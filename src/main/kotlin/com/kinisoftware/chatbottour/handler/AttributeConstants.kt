@@ -1,6 +1,6 @@
 package com.kinisoftware.chatbottour.handler
 
 object AttributeConstants {
-    const val FOOD = "food"
-    const val RESTAURANT = "restaurant"
+    const val FOOD = "comida"
+    const val RESTAURANT = "lugar"
 }

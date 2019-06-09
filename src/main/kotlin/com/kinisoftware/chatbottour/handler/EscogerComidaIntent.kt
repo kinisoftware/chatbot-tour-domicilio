@@ -7,9 +7,9 @@ import com.amazon.ask.model.Response
 import com.amazon.ask.request.Predicates
 import java.util.*
 
-class OrderIntent : RequestHandler {
+class EscogerComidaIntent : RequestHandler {
     override fun canHandle(input: HandlerInput): Boolean {
-        return input.matches(Predicates.intentName("OrderIntent"))
+        return input.matches(Predicates.intentName("EscogerComidaIntent"))
     }
 
     override fun handle(input: HandlerInput): Optional<Response> {
@@ -27,7 +27,7 @@ class OrderIntent : RequestHandler {
         val intent = intentRequest.intent
         val slots = intent.slots
 
-        val order = slots["order"]!!.value
+        val order = slots["comprar"]!!.value
 
         val restaurant = input.attributesManager.sessionAttributes[AttributeConstants.RESTAURANT]
         val text = "Okay, ¡gran elección! Vamos a comprar $order en $restaurant."

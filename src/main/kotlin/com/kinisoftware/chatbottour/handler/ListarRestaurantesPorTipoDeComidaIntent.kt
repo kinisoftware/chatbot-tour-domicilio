@@ -8,9 +8,9 @@ import com.amazon.ask.model.slu.entityresolution.StatusCode
 import com.amazon.ask.request.Predicates
 import java.util.*
 
-class WannaEatIntent : RequestHandler {
+class ListarRestaurantesPorTipoDeComidaIntent : RequestHandler {
     override fun canHandle(input: HandlerInput): Boolean {
-        return input.matches(Predicates.intentName("WannaEatIntent"))
+        return input.matches(Predicates.intentName("ListarRestaurantesPorTipoDeComidaIntent"))
     }
 
     override fun handle(input: HandlerInput): Optional<Response> {
@@ -19,7 +19,7 @@ class WannaEatIntent : RequestHandler {
         val intent = intentRequest.intent
         val slots = intent.slots
 
-        val foodSlot = slots["food"]
+        val foodSlot = slots["comida"]
         val food = foodSlot?.value
         val text = when (food) {
             null -> "Elige algún tipo de comida como pizza o hamburguesa"
