@@ -9,7 +9,7 @@ import java.util.*
 
 class ListarMenuIntent : RequestHandler {
     override fun canHandle(input: HandlerInput): Boolean {
-        return input.matches(Predicates.intentName("ListarMenuIntent"))
+        return input.matches(Predicates.intentName("listar_menu"))
     }
 
     override fun handle(input: HandlerInput): Optional<Response> {

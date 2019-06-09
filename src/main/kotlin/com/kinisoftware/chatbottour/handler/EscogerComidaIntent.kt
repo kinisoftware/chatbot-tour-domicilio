@@ -9,7 +9,7 @@ import java.util.*
 
 class EscogerComidaIntent : RequestHandler {
     override fun canHandle(input: HandlerInput): Boolean {
-        return input.matches(Predicates.intentName("EscogerComidaIntent"))
+        return input.matches(Predicates.intentName("escoger_comida"))
     }
 
     override fun handle(input: HandlerInput): Optional<Response> {

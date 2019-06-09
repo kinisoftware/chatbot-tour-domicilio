@@ -10,7 +10,7 @@ import java.util.*
 
 class ListarRestaurantesPorTipoDeComidaIntent : RequestHandler {
     override fun canHandle(input: HandlerInput): Boolean {
-        return input.matches(Predicates.intentName("ListarRestaurantesPorTipoDeComidaIntent"))
+        return input.matches(Predicates.intentName("listar_restaurantes_por_tipo_de_comida"))
     }
 
     override fun handle(input: HandlerInput): Optional<Response> {
